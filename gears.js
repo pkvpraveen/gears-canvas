@@ -24,7 +24,7 @@
 
 //// Create StyleKit Object
 var StyleKitName = {};
-(function() {
+(function () {
 
   //// Drawing Methods
 
@@ -51,11 +51,28 @@ var StyleKitName = {};
     //// Variable Declarations
     var rotationInverted = -rotation;
 
+    drawCog1(74.8, 78.08, context, color4, rotation);
+    drawCog2(120.3, 139.08, context, color3, rotationInverted);
+    drawCog3(191.3, 110.58, context, color2, rotation);
+    drawCog4(49.3, 167.58, context, color, rotation);
+    drawCog5(145.8, 49.58, context, blue, rotationInverted);
+    drawCog5(219, 181, context, blue, rotationInverted);
+    drawCog5(79, 238, context, blue, rotationInverted);
+    drawCog5(149, 210, context, blue, -rotationInverted);
+    drawCog1(124,299, context, color4, rotation);
+    drawCog2(194, 270, context, color4, rotationInverted);
+    drawCogSmall(191,331, context, color4, rotation);
+    // drawCogSmall(mouse.x,mouse.y,context,blue, -rotationInverted);
+
+    context.restore();
+
+  }
+
+  function drawCog1(x, y, context, color4, rotation) {
     //// Group
     context.save();
-    context.translate(74.8, 78.08);
+    context.translate(x,y);
     context.rotate(-rotation * Math.PI / 180);
-
 
 
     //// Rectangle Drawing
@@ -225,16 +242,15 @@ var StyleKitName = {};
     context.fill();
 
 
-
-
     context.restore();
 
+  }
 
+  function drawCog2(x, y, context, color3, rotationInverted) {
     //// Group 2
     context.save();
-    context.translate(120.3, 139.08);
+    context.translate(x, y);
     context.rotate(-rotationInverted * Math.PI / 180);
-
 
 
     //// Rectangle 7 Drawing
@@ -416,16 +432,14 @@ var StyleKitName = {};
     context.fill();
 
 
-
-
     context.restore();
+  }
 
-
+  function drawCog3(x, y, context, color2, rotation) {
     //// Group 3
     context.save();
-    context.translate(191.3, 110.58);
+    context.translate(x,y);
     context.rotate(-rotation * Math.PI / 180);
-
 
 
     //// Rectangle 25 Drawing
@@ -601,16 +615,66 @@ var StyleKitName = {};
     context.restore();
 
 
+    context.restore();
+  }
+  function drawCogSmall(x, y, context, color2, rotation) {
+    //// Group 3
+    context.save();
+    context.translate(x,y);
+    context.rotate(-rotation*2 * Math.PI / 180);
+    drawFulcrum(context,30, color2);
+    // drawFulcrum(context,60, color2);
+    drawFulcrum(context,90, color2);
+    // drawFulcrum(context,120, color2);
+    drawFulcrum(context,150, color2);
+    // drawFulcrum(context,180, color2);
+    drawFulcrum(context,210, color2);
+    // drawFulcrum(context,240, color2);
+    drawFulcrum(context,270, color2);
+    // drawFulcrum(context,300, color2);
+    drawFulcrum(context,330, color2);
+    // drawFulcrum(context,360, color2);
 
+    context.beginPath();
+    context.arc(0,0,15,0,2*Math.PI,false);
+    context.strokeStyle = color2;
+    context.lineWidth = 10;
+    context.stroke();
+
+
+    //// Oval 3 Drawing
+    context.save();
+    context.translate(0.01, 0.01);
+    context.rotate(47.74 * Math.PI / 180);
+
+    oval(context, -3.42, -3.42, 6.84, 6.84);
+    context.fillStyle = color2;
+    context.fill();
 
     context.restore();
 
 
-    //// Group 4
-    context.save();
-    context.translate(49.3, 167.58);
-    context.rotate(-rotation * Math.PI / 180);
+    context.restore();
+  }
 
+  function drawFulcrum(context, angle, color2) {
+    //// Rectangle 36 Drawing
+    context.save();
+    context.translate(0.03, 0.01);
+    context.rotate(angle * Math.PI / 180);
+
+    roundedRect(context, -3.5, -25.5, 10, 10, 5);
+    context.fillStyle = color2;
+    context.fill();
+    context.restore();
+  }
+
+  function drawCog4(x, y, context, color, rotation) {
+//// Group 4
+    context.save();
+    // context.translate(49.3, 167.58);
+    context.translate(x, y);
+    context.rotate(-rotation * Math.PI / 180);
 
 
     //// Rectangle 37 Drawing
@@ -793,20 +857,15 @@ var StyleKitName = {};
     context.closePath();
     context.fillStyle = color;
     context.fill();
-
     context.restore();
-
-
-
-
     context.restore();
+  }
 
-
+  function drawCog5(x, y, context, blue, rotationInverted) {
     //// Group 5
     context.save();
-    context.translate(145.8, 49.58);
+    context.translate(x, y);
     context.rotate(-rotationInverted * Math.PI / 180);
-
 
 
     //// Rectangle 49 Drawing
@@ -988,12 +1047,7 @@ var StyleKitName = {};
     context.fill();
 
 
-
-
     context.restore();
-
-    context.restore();
-
   }
 
   //// Infrastructure
@@ -1052,23 +1106,23 @@ var StyleKitName = {};
     context.save();
     context.beginPath();
     context.translate(x, y);
-    context.scale(w/2, h/2);
-    context.arc(1, 1, 1, 0, 2*Math.PI, false);
+    context.scale(w / 2, h / 2);
+    context.arc(1, 1, 1, 0, 2 * Math.PI, false);
     context.closePath();
     context.restore();
   }
 
   function roundedRect(context, x, y, w, h, r) {
     context.beginPath();
-    context.arc(x+r, y+r, r, Math.PI, 1.5*Math.PI);
-    context.arc(x+w-r, y+r, r, 1.5*Math.PI, 2*Math.PI);
-    context.arc(x+w-r, y+h-r, r, 0, 0.5*Math.PI);
-    context.arc(x+r, y+h-r, r, 0.5*Math.PI, Math.PI);
+    context.arc(x + r, y + r, r, Math.PI, 1.5 * Math.PI);
+    context.arc(x + w - r, y + r, r, 1.5 * Math.PI, 2 * Math.PI);
+    context.arc(x + w - r, y + h - r, r, 0, 0.5 * Math.PI);
+    context.arc(x + r, y + h - r, r, 0.5 * Math.PI, Math.PI);
     context.closePath();
   }
 
   function makeRect(x, y, w, h) {
-    return { x: x, y: y, w: w, h: h };
+    return {x: x, y: y, w: w, h: h};
   }
 
   function equalRects(r1, r2) {
@@ -1076,7 +1130,7 @@ var StyleKitName = {};
   }
 
   function makeSize(w, h) {
-    return { w: w, h: h };
+    return {w: w, h: h};
   }
 
   function initializeCanvas(canvas) {
@@ -1112,5 +1166,14 @@ var StyleKitName = {};
   // Utilities
   StyleKitName.clearCanvas = clearCanvas;
   StyleKitName.makeRect = makeRect;
+  let mouse = {
+    x: 0,
+    y: 0
+  };
+  addEventListener('mousemove', function (event) {
+    mouse.x = event.x;
+    mouse.y = event.y;
+    console.log(mouse.x, mouse.y);
+  })
 
 })();

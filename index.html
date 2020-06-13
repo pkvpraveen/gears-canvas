@@ -3,28 +3,31 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
-    <script type="text/javascript" src="gears.js"></script>
-    <script>
-      var offset = 0.0;
-
-      function draw() {
-        StyleKitName.clearCanvas('gears');
-        StyleKitName.drawGears('gears', offset);
-      }
-
-      var tid = setInterval(loop, 25);
-      var canvas = document.getElementById("gears");
-      var context = canvas.getContext("2d");
-
-      function loop() {
-        offset += 1;
-        draw();
-      }
-    </script>
 </head>
 
 <body>
-<canvas id="gears" width="240" height="220"></canvas>
+<canvas id="gears" width="500" height="500"></canvas>
+<script type="text/javascript" src="gears.js"></script>
+<script>
+  var offset = 0.0;
+
+  function draw() {
+    StyleKitName.clearCanvas('gears');
+    StyleKitName.drawGears('gears', offset);
+  }
+
+  var tid = setInterval(loop, 25);
+  var canvas = document.getElementById("gears");
+  var context = canvas.getContext("2d");
+
+  function loop() {
+    if(offset>360){
+      offset =0
+    }
+    offset += 1;
+    draw();
+  }
+</script>
 </body>
 
 </html>
