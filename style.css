@@ -1,0 +1,7 @@
+canvas#gears {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -110px;
+    margin-left: -120px;
+}
